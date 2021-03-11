@@ -1,0 +1,80 @@
+\chapter{Software a popis funkce}
+Tato kapitola se týká popisu funkce celého systému ProtoPlant a softwarové stránky projektu.
+
+\section{ProtoPlant knihovna}
+Softwarová knihovna PPlant vytvořená mnou obsahuje jednodušší podpůrné funkce ovládající hardware skleníku.
+Mezi ně patří:
+\begin{itemize}
+    \item Spouštění a zastavování čerpadla vody
+    \item Práce s LCD
+\end{itemize}
+
+\section{Start-up sekvence}
+Tato sekvence se sestává z několika operací nutných pro správnou inicializaci systému.
+
+Celá sekvence by se dala rozdělit na několik úkonů:
+\begin{enumerate}
+    \item Inicializace LCD
+    \item Kontrola systému
+    \item Inicializace senzorů
+    \item Nastavení krajních hodnot parametrů prostředí, nebo jejich načtení z paměti
+\end{enumerate}
+Po dokončení celé sekvence se systém automaticky přepne do režimu standby, ve kterém na pozadí monitoruje vlhkost a teplotu.
+
+\subsection{První spuštění}
+Při prvním spuštění se systém při provádění startup sekvence zastaví v bodě 4, při kterém musí uživatel nastavit krajní hodnoty vlhkosti a teploty.
+Ty uloží následně do flash paměti čipu ESP32, kde zůstanou zachované i v případě, že se systém vypne, nebo vypadne proud.
+Po zadání a~uložení hodnot systém následně pokračuje v běhu přechodem do režimu standby.
+
+\subsection{Opakované spuštění}
+Při opakovaném spuštění již systém v bodě 4 nastavení parametrů nepožaduje, místo toho si načte uložené hodnoty z paměti a pokračuje v normálním chodu.
+
+\section{Režim STANDBY}
+Po proběhnutí startup sekvence se systém automaticky přepne do režimu STANDBY.
+V tomto režimu systém na pozadí periodicky měří hodnoty vlhkosti a teploty, které následně porovnává s~hodnotami uloženými ve flash paměti.
+Zároveň naměřené hodnoty vypíše na LCD~displej.
+
+\section{Zavlažování a měření vlhkosti}
+Vlhkost vzduchu je pravidelně měřena třemi senzory DHT22 rozmístěnými po skleníku. %\fxnote*[author=MB]{Výše píšete o maximálně dvou}{několika}
+Interval pro měření teploty je nastaven na 1 minutu, což je optimální doba vypozorovaná z testování, které jsem dříve provedl.
+Z dat naměřených jednotlivými senzory je následně vypočten aritmetický průměr.
+Výsledná hodnota je porovnaná s krajními mezemi vlhkosti nastavenými uživatelem.
+Pokud je výsledek v mezích, skleník pokračuje v~periodickém měření vlhkosti. Pokud je vlhkost příliš nízká, systém sepne solid state relé umístěné v řídící jednotce. 
+Čerpadlo, které je k němu připojené se tedy spustí. 
+%\fxnote*[author=MB]{A co když je ve skleníku moc vlhko?}{v mezích},
+V případě, že je vlhkost příliš vysoká, systém otevře okna, případně spustí ventilátor umístěný na stěně skleníku.
+
+\subsection{Softwarová stránka zavlažování}
+Zavlažování je po softwarové stránce velmi jednoduchým úkonem.
+Měření a zpracování teploty zajišťují knihovny DHT a DHT\_U přímo od výrobce senzorů DHT22, Adafruitu.
+Samotné porovnání teploty s mezní hodnotou je provedeno v hlavním programu main. 
+Spouštění čerpadla se následně provede zavoláním příkazu pro spuštění čerpadla, který obsaženého v knihovně PPlant.
+
+\section{Ovládání oken}
+Systém v pravidelných intervalech měří teplotu.
+Tuto naměřenou hodnotu porovnanává s mezními hodnotami uloženými v paměti.
+V případě, že je teplota v mezích, systém pokračuje v normálním chodu.
+Pokud je teplota příliš vysoká, okna se otevřou, pokud je teplota moc nízká, zavřou se.
+
+\subsection{Software pro ovládání oken}
+Pro řízení inventoru polarity aktuátorů ovládajících okna jsem napsal vlastní knihovnu.
+% Celá je řízena těmito pěti  \fxnote*[author=MB]{Více v poznámce ve zdrojovém textu }{funkcemi.}
+\begin{verbatim}  Mezi některé funkce této knihovny patří:
+    window.begin();         
+    window.getstate();      
+    window.close();         
+    window.open();          
+    window.changestate();
+\end{verbatim}
+
+%pro formátování kódu doporučuju balíček listings, viz https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
+% například: \lstinputlisting{priklady_c/blikani_LED1.cpp}
+% a nebo alespoň písmo verbatim \verb@"psací stroj"@
+
+Nejdříve se knihovna inicializuje zavoláním funkce window.begin();.
+Funkce getstate(); je využívána pro zjištění, zda jsou okna otevřená, či nikoliv. 
+Jejím výstupem je logická hodnota true/false.
+Funkce open(); a close(); jsou využity, jak již jejich název napovídá k otevření, či zavření oken.
+S pomocí funkce changestate(); jsme schopni přepínat mezi otevřeným/zavřeným stavem nezávisle na tom, jakém stavu jsou před jejím zavoláním.
+V případě, že jsou okna před jejím zavoláním otevřená, zavolání funkce je zavře a naopak.
+

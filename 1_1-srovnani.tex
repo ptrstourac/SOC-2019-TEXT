@@ -1,0 +1,79 @@
+\chapter{Srovnání s konkurencí}
+Co se týče konkurence ProtoPlantu, řadí se do dvou kategorií:
+\begin{itemize} 
+    \item průmyslová řešení
+    \item řešení vytvořená kutily
+\end{itemize}
+
+\section{Průmyslová řešení}
+V případě průmyslových řešení existují různé možnosti.
+Ovšem prakticky všechny z nich jsou určeny pro využití ve velkých sklenících používaných ve velkozemědělství.
+Zároveň je valná většina z nich instalována na míru -- není zde tedy možnost toho, že by si tento systém uživatel nainstaloval sám.
+
+Co se ceny týče, ta se u~těchto systémů šplhá až do stovek tisíc, chybí zde tedy i cenová dostupnost těchto systémů.
+
+Samotné řízení těchto průmyslových systémů je v drtivé většině případů zajišťováno tzv. PLC -- programovatelnými automaty.
+Samotné PLC jsou velmi drahá a fungují jen čistě jakožto řídící hardware -- senzory a periferie tedy nejsou do ceny započítány.
+
+Několik příkladů používaných PLC v tabulce \ref{table:plc_pricing}.
+\begin{table}
+    \centering
+    \caption{Srovnání PLC a ProtoPLant řídící jednotky}
+    \begin{tabular}{lllll}
+    PLC        & Cena     & Výrobce       & Síťové vybavení & Příslušenství 
+    (senzory, atp.)     \\
+    \hline
+    MPC 410\cite{MicropelPLC}    & 7 300,- & Micropel      & není            & \multirow{4}{*}{Nutné dokoupit }  \\
+    S7 - 1200\cite{S7-1200PLC}   & 7 825,-   & Siement       & Ethernet        &                                   \\
+    FX3s\cite{FX3sPLC}           & 6 000,-   & Mitsubishi    & Ethernet        &                                   \\
+    Micro 810\cite{Micro810PLC}  & 2 693,-   & Allen Bradley & není            &                                   \\
+    \hline
+    ProtoPlant                   & 2 000,-   &               & WiFi, bluetooth & Senzory, napájení v ceně         
+    \end{tabular}
+    \label{table:plc_pricing}
+    \end{table}
+
+U dalšího hardwaru to je s cenou velmi podobné.
+Firmy navíc dělají tyto instalace na zakázku, tudíž je třeba si připlatit i za práci.
+
+\section{Kutilská řešení}
+U~této kategorie sice konkurence existuje, ovšem projekty, které jsem našel na webu postrádají několik vlastností ProtoPlantu.
+
+Tyto vlastnosti jsou:
+\begin{itemize}
+    \item jednoduchost -- k výrobě jsou třeba zkušenosti s elektrotechnikou
+    \item univerzálnost -- většina těchto řešení je určena pro malé skleníky
+    \item modularita
+\end{itemize}
+
+Daly by se sice nazvat cenově příznivé, ovšem co se týče dostupnosti, jsou tyto projekty vhodné pouze pro uživatele, kteří mají určité znalosti s~programováním a~elektrotechnikou.
+
+Pro srovnání uvedu dva příklady.
+\subsection{Arduino: automatický skleník}
+Autor této bakalářské práce \cite{sklenikVavra} se přede mnou již pokusil vytvořit systém podobný ProtoPlantu založený na Arduinu.
+Jde ovšem pouze o teoretickou práci, jeho systém nikdy nebyl uveden do praxe.
+
+\subsection{Raspberry Pi Greenhouse}
+Tento projekt \cite{raspPIgreenhouse} je založen na Raspberry PI.
+Nutností pro jeho sestavení jsou určité znalosti v elektrotechnice a programování.
+
+\begin{table}[]
+    \centering
+    \caption{Srovnání ProtoPlantu a projektu s RPI}
+    \begin{tabular}{lll}
+    Vlastnost                                                            & ProtoPlant                  & Projekt s Raspberry PI \\ \hline
+    \multicolumn{1}{l|}{Modularita}                                      & \multicolumn{1}{l|}{\cmark} & \xmark                 \\
+    \multicolumn{1}{l|}{Univerzálnost}                                   & \multicolumn{1}{l|}{\cmark} & \xmark                 \\
+    \multicolumn{1}{l|}{Jednoduchost instalace}                          & \multicolumn{1}{l|}{\cmark} & \xmark                 \\
+    \multicolumn{1}{l|}{Uvedení do praktického provozu}                  & \multicolumn{1}{l|}{\cmark} & \cmark                 \\
+    \multicolumn{1}{l|}{Možnost instalace do různých velikostí skleníku} & \multicolumn{1}{l|}{\cmark} & \xmark                 \\
+    \multicolumn{1}{l|}{Odolnost (vodotěsnost)}                          & \multicolumn{1}{l|}{\cmark} & \xmark                 \\
+    \multicolumn{1}{l|}{Cena}                                            & \multicolumn{1}{l|}{\cmark} & \cmark                
+    \label{table:comparationPPandRPI}
+    \end{tabular}
+    \end{table}
+
+\section{Shrnutí}
+Konkurence v~tomto oboru je skutečně chudá.
+Na jedné straně jsou drahá průmyslová řešení instalovaná na míru, na straně druhé jsou tu projekty pro kutily, které ovšem jsou určeny jen pro uživatele se znalostí elektrotechniky a~programování.
+Tuto díru na trhu se snažím vyplnit vytvořením ProtoPlantu -- systému dostupnému pro běžné uživatele a~domácnosti, který bude dostupný i~cenově i~materiálně.

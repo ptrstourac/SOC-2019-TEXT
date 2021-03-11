@@ -1,0 +1,76 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {czech}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Úvod}{7}{chapter*.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Proč automatický skleník?}{9}{chapter.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Srovnání s konkurencí}{10}{chapter.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}Průmyslová řešení}{10}{section.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.2}Kutilská řešení}{11}{section.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2.1}Arduino: automatický skleník}{11}{subsection.2.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2.2}Raspberry Pi Greenhouse}{11}{subsection.2.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.3}Shrnutí}{12}{section.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Hardware}{13}{chapter.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}Napájení}{13}{section.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Řídící jednotka}{13}{section.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.1}ESP32 DevKit C}{14}{subsection.3.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.2}Invertor polarity pro pohon oken}{14}{subsection.3.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.3}Aktuátory pro manipulaci s okny}{14}{section.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.4}Senzory}{15}{section.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4.1}DHT 11/22}{15}{subsection.3.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4.2}DS18B20}{15}{subsection.3.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.5}Ovládání oken}{16}{section.3.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.6}Ventilátor}{16}{section.3.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.7}Zavlažování}{16}{section.3.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Software a popis funkce}{17}{chapter.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}ProtoPlant knihovna}{17}{section.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}Start-up sekvence}{17}{section.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.1}První spuštění}{18}{subsection.4.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.2}Opakované spuštění}{18}{subsection.4.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.3}Režim STANDBY}{18}{section.4.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.4}Zavlažování a měření vlhkosti}{18}{section.4.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.4.1}Softwarová stránka zavlažování}{19}{subsection.4.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.5}Ovládání oken}{19}{section.4.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.5.1}Software pro ovládání oken}{19}{subsection.4.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Velká verze skleníku}{21}{chapter.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Prezentační model}{22}{chapter.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Závěr}{24}{chapter*.15}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Literatura}{25}{section*.16}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Seznam obrázků}{25}{chapter*.17}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Seznam tabulek}{26}{chapter*.18}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Přílohy}{27}{chapter*.19}%

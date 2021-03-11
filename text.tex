@@ -1,0 +1,125 @@
+\documentclass{template/socthesis}
+
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{color} % balíček pro obarvování textů
+\usepackage{xcolor}  % zapne možnost používání barev, mj. pro \definecolor
+\definecolor{mygreen}{RGB}{0,150,0} % nastavení barev odkazů 
+\usepackage{listings} % balíček pro formátování zdrojových kódů 
+\usepackage[author=,status=draft]{fixme} % vkládání poznámek  
+% dva módy (status): draft (poznámky se zobrazují v PDF) / final (poznámky se nezobrazují v PDF)
+\usepackage{multirow}
+\usepackage{pifont}
+\usepackage{hyperref}
+
+\newcommand{\cmark}{\textcolor{green}{\ding{51}}}
+\newcommand{\xmark}{\textcolor{red}{\ding{55}}}
+
+\addbibresource{text.bib}
+\nocite{*}
+
+\titlecz{Automatický skleník}
+\titleen{Automatic greenhouse}
+\author{Petr Štourač}
+\field{10}
+\school{Střední průmyslová škola a Vyšší odborná škola Brno, Sokolská, příspěvková organizace}  
+
+\mentor{Mgr. Miroslav Burda}
+\mentorstatement{Mgr. Miroslava Burdy}
+
+
+
+% Změňte, pokud se liší
+%\region{Jihomoravský}
+%\placefooter{Brno 2018}
+
+\begin{document}
+	
+	\maketitle
+	
+	\makecopyrightstatement{V~Brně}
+	
+	\makethanks{Děkuji svému školiteli Mgr. Miroslavu Burdovi za obětavou pomoc, podnětné připomínky a nekonečnou trpělivost, kterou mi během práce poskytoval. Zároveň děkuji svému otci za samotný námět práce a paní profesorce Mgr.~Janě Vaculíkové za korekci anglického textu.}
+	
+	\pagestyle{empty}
+	
+	\section*{Anotace}
+
+    Pěstování skleníkových rostlin je velice roz\-ší\-řenou činností.
+	Lidé, kteří běžně chodí do práce, mají stále méně času na péči o svoje skleníkové rostliny.
+	Mojí snahou je těmto lidem péči o~rostliny částečně usnadnit zautomatizováním každodenních činností, jako je zalévání nebo větrání.
+	
+	Mým řešením je systém na automatizaci skleníku s~názvem ProtoPlant.
+	Celý systém je navržen tak, aby byl jednoduchý na obsluhu, byl modulární a~zároveň levný. 
+	Po instalaci jej uživatel spustí, provede prvotní nastavení 
+	a~o~zbytek se již ProtoPlant postará sám.
+	
+	\subsection*{Klíčová slova}
+	automatický skleník; automatizace; zavlažování; ventilace; skleníkové rostliny
+		
+	\section*{Annotation}
+    Growing greenhouse plants is a very common hobby.
+    People, who must work every day simply have less and less time to care about their greenhouse plants.
+    My endeavour is to help these people by automating everyday actions, such as irrigation, or ventilation.
+	
+	My solution of this problem is ProtoPlant, greenhouse automation system.
+	Whole system is designed to be simple, modular and cheap.
+	After installation, user goes through the first time setup and from this point, Protoplants begins to take care of everything else alone.
+	
+	\subsection*{Keywords}
+	automatic greenhouse; automation; irrigation; ventilation; greenhouse plants
+	
+	\newpage
+	\pagestyle{plain}
+	
+    \tableofcontents % vysází obsah
+	
+	%%% Začátek práce
+	\setcounter{figure}{0}
+	\setcounter{table}{0}
+	\newpage
+	
+	%%% Úvod
+	\input{01-uvod.tex}
+
+	%%% Motivace
+	\input{02-motivace.tex}
+
+	%%% Srovnani
+	\input{1_1-srovnani.tex}
+
+	%%% Hardware
+	\input{04-hardware.tex}
+	
+	%%% Software
+	\input{05-software.tex}
+	
+	%%% Velká verze skleníku
+	\input{06-full_verze_skleniku.tex}
+
+	%%% Malá verze skleníku
+	\input{07-prezentacni_minisklenik.tex}
+	
+	%%% Závěr
+	\input{08-zaver.tex}
+
+
+	
+	\newpage
+
+
+	\printbibliography[title=Literatura]
+	\addcontentsline{toc}{section}{Literatura}
+	
+	\listoffigures
+	\addcontentsline{toc}{section}{Seznam obrázků}
+	
+	\listoftables
+	\addcontentsline{toc}{section}{Seznam tabulek}
+	
+%	\listoflistedequation
+%	\addcontentsline{toc}{section}{Seznam rovnic}
+\input{prilohy.tex}
+
+\end{document}

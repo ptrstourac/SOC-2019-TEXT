@@ -1,0 +1,93 @@
+\chapter{Hardware}
+Jak již bylo zmíněno, ProtoPlant je modulární systém.
+Jádrem celého systému je řídící jednotka. 
+K~ní jsou připojeny periferie, jako senzory, čerpadla, atd.
+
+\section{Napájení}
+Systém je rozdělen na celkem 2 napájecí okruhy.
+Zdrojem el. proudu je zásuvka.
+Do ní se s pomocí klasické vidlicové zástrčky připojí měniče první a druhé větve.
+První větev s napětím 12~V je používaná k~napájení aktuátorů.
+Druhá, 5-ti~voltová větev napájí řídící elektroniku a senzory.
+
+%\fxnote*[author=MB]{místo 3.3 patří 3,3 V}{obrázek}
+
+\section{Řídící jednotka}
+Jádrem celého systému je tzv. řídící jednotka.
+Vnější obal tvoří vodotěsná průmyslová krabice z~ABS plastu s~krytím IP65.
+Ta v sobě ukrývá řídící elektroniku a~invertor polarity (viz. níže).
+Na krajích řídící jednotky se nachází průchodky s~kabelovými vývody pro připojení ostatního hardwaru.
+Na přední straně se nachází znakový lcd display (20x4) a několik průmyslových tlačítek sloužících k ručnímu ovládání zavlažování a oken.
+
+\subsection{ESP32 DevKit C}
+Celý systém je řízen touto deskou, která je osazena mikroprocesorem ESP32. 
+Celá deska má celkem 37 pinů, z toho jeden napájecí a dva zemnící. 
+16 pinů lze použít jako analogové.
+
+Důvod, proč jsem se rozhodl své řešení založit na ESP32 DevKitu C je jednoduchý.
+Deska je univerzální, má poměrně dobrý výkon a sama o sobě podporuje WiFi, čímž je možno systém vylepšit o možnost ovládání přes internet, když jsme například na dovolené. 
+
+Samotná deska je určena pro napájení 5~V, je tedy připojena k druhé napájecí větvi.
+
+\subsection{Invertor polarity pro pohon oken}
+Toto zařízení slouží k měnění polarity lineárních aktuátorů používaných pro otevírání a zavírání oken.
+Sestává se ze tří spínacích relé, z nichž jedno řídí napájení a zbylá dvě slouží k inverzi polarity.
+
+Princip zařízení je jednoduchý.
+Jakmile je nutné otevřít/zavřít okna, je nejdříve sepnuto relé, které řídí napájení.
+V případě otevírání se dále sepnou obě relé řídící polaritu -- okna se začnou zavírat.
+Pro dobu běhu motoru je stanoven fixní časový limit, který závisí na délce aktuátorů a jejich rychlosti. Po jeho uběhnutí se napájecí relé opět rozepne a aktuátory tedy přestanou být napájeny.
+Zároveň se rozepne i relé řídící polaritu.
+Jakmile chceme okna zavřít, relé řídící polaritu zůstanou rozepnuta a sepne jen relé ovládající napájení.
+
+
+
+%\fxnote*[author=MB]{Text "Relé 3" nejde přečíst}{obrázek}
+\section{Aktuátory pro manipulaci s okny}
+Pro otevírání a zavírání oken používám lineární aktuátory.
+Jejich pracovní napětí je 12~V.
+Samotné aktuátory mají zabudovaná koncová čidla, po dojezdu do koncové polohy se samy zastaví.
+Směr jejich pohybu lze ovládat inverzí polarity, kterou vykonává můj invertor polarity umístěný v řídící jednotce.
+
+\section{Senzory}
+Ke sledování stavu prostředí ve skleníku používám několik senzorů.
+\begin{itemize}
+	\item DHT 11, případně DHT 22
+	\item DS18B20
+\end{itemize}
+
+\subsection{DHT 11/22}
+DHT 11/22 jsou čidla, která používám pro měření vlhkosti vzduchu.
+Jsou určena pro napájení na 5~V stejnosměrného napětí.
+Jsou rozmístěna na krajích skleníku, z naměřených hodnot je následně vytvořen průměr. 
+Počet použitých čidel se liší podle velikosti skleníku, ovšem pro základní verzi ProtoPlantu je z důvodu nedostatku GPIO u ESP32 nastaven limit tři senzory. Dva vnitřní a~jeden venkovní.
+
+\subsection{DS18B20}
+Tyto senzory používám k měření teploty.
+Jsou zapojena přes 1-Wire sběrnici, což umožňuje připojení maximálně 10 těchto senzorů k jednomu pinu.
+Samotný senzor má 3 piny: jeden napájecí (VCC), druhý datový (DQ) a třetí pro společnou zem napájecí i datovou (GND).
+1-Wire sběrnice dokáže pracovat ve dvou režimech napájení senzorů, klasickém třídrátovém, nebo v režimu napájení parazitního (s využitím jen dvou drátů).
+Z těchto dvou režimů využívá ProtoPlant režim klasický, třídrátový režim.
+
+Maximální počet těchto senzorů, který je možno připojit k systému ProtoPlant je omezen na 6.
+
+\section{Ovládání oken}
+Okna jsou ovládána lineárními elektro-mechanickými aktuátory.
+Jejich provozní napětí je 12~V.
+Díky využití stejnosměrných motorů je možno měnit směr jejich pohybu jednoduchým obrácením polarity, což zajišťuje invertor polarity popsaný výše.
+Rychlost posuvu je fixní, doba vysunutí tedy závisí pouze na délce aktuátorů.
+
+\section{Ventilátor}
+Pro zlepšení regulace vzdušné vlhkosti a zlepšení cirkulace vzduchu využívám pro drobnou korekci teploty ventilátor připevněný na stěně skleníku.
+Ten se spustí v době, kdy je vnitřní teplota velmi nízko nad nastavenou horní mezí.
+
+\section{Zavlažování}
+Zavlažování obstarává vysokotlaké čerpadlo vody, které nasává vodu z nádrže umístěné přímo ve skleníku.
+Je napájeno 12~V stejnosměrného napětí.
+Čerpadlo je řízeno s pomocí SSR relé umístěného v řídící jednotce.
+Voda se čerpá do rozvodů umístěných v horní části skleníku.
+Na těchto rozvodech jsou nainstalovány rozprašovače.
+
+
+
+%\fxnote*[author=MB]{Na obrázku je použito 220V místo 230V}{obrázek}
